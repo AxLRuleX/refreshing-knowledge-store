@@ -1,8 +1,17 @@
-{% comment %}
-  it doesn't affect using the - after the %, te only thin that
-  changes is that if we didn't use it, it will add an empty line
-  before and after we print a variable
-{% endcomment %}
+{% comment %} String {% endcomment %}
+ {%  assign my_string = "Hello world" %}
+ {{ my_string }}
+<br>
+ {% comment %} numbers {% endcomment %}
+  {%  assign my_number = 123 %}
+  {% assign my_floating_point = 123.5 %}
+{{ my_number }} , {{ my_floating_point }}
+<br>
+{% comment %} boolean {% endcomment %}
+ {%  assign my_boolean = true %}
+ {{ my_boolean }}
 
-{% assign my_variable = "hello World of accel" %}
-{{ my_variable }}
+ <br>
+ {% comment %} nil or null {% endcomment %}
+  {% assign my_nil = null %}
+  {{ my_nil }}
