@@ -133,3 +133,59 @@
     {% if is_a_snowboard and product.price < 70000 %}
       <p> This is an affordable snowboard in a nested condition </p>
     {% endif %}
+
+    {% comment %} Switch case, we use blank to check if the string is empty and not null or nil because those are use to check is a variable is undefined {% endcomment %}
+     {% if product.type != blank %}
+     {% case product.type %}
+       {% when "snowboard" %}
+         <p> Is a snowboard </p>
+       {% when "ski wax" %}
+         <p> Is a ski wax </p>
+         {% when "gift card" %}
+         <p> Is a gift card </p>
+         {% else %}
+          <p> Not known product type </p>
+     {% endcase %}
+     {% endif %}
+
+     {% comment %} truthy and falsy, all data types must return either true or false. those which return true by default are called truthy. those which return false by default are called falsy {% endcomment %}
+
+     {% if product.title %}
+        <p> This is the product title: {{ product.title }}</p>
+      {%  endif %}
+
+      {% comment %} loops, the limit parameter set the limit for the loop to stop at, and the offset sets the starting point of the loop {% endcomment %}
+       {% for product in collection.products limit: 5 offset: 1 %}
+         <p style=" 
+          {% if forloop.first %}
+           color: green
+           {% elsif forloop.last %}
+            color: orange 
+           {% endif %}
+            "
+            {% comment %}
+              forloop.index is the number of the iteration of the loop started in one, if we want to start at 0 we use forloop.index0
+            {% endcomment %}
+        > <b>  {{ forloop.index }} - {{ product.title }}</b></p>
+        {% if product.tags.size > 0 %}
+            <h2> Tags </h2>
+          <ul>
+            {% for tag in product.tags %}
+              {% comment %}
+                forloop.parentloop.index take the value of the first loop we create inside the nested loops, if there are more loops inside the first loop we can use forloop.parentloop.parentloop as much as we need
+                to get to the value we want
+              {% endcomment %}
+               {% if tag == "Accesory" %}
+                {% continue %}{% comment %} This continue the iteration at the specific point where the for is valid{% endcomment %}
+              {% endif %}
+              <li> Product Index {{ forloop.parentloop.index }} | {{ tag }} </li>
+              {% if tag == "Sport" %}
+                {% break %}{% comment %} This end the iteration at the specific point where the for is valid{% endcomment %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+          
+        {% endif %}
+        {% else %}
+             <p> This collection has no products </p>
+       {% endfor %}
