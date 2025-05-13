@@ -1,6 +1,8 @@
+{% comment %} These are the types of varibales we can work with in shopify {% endcomment %}
+
 {% comment %} String {% endcomment %}
  {%  assign my_string = "Hello world" %}
- {{ my_string }}
+ {{ my_string }}, This string has {{ my_string.size }} characters
 <br>
  {% comment %} numbers {% endcomment %}
   {%  assign my_number = 123 %}
@@ -15,3 +17,94 @@
  {% comment %} nil or null {% endcomment %}
   {% assign my_nil = null %}
   {{ my_nil }}
+  
+  {% comment %} conditional: As undefine_variable doesn't exist, it will show the message {% endcomment %}
+   {% if undefine_variable == nil %}
+     <p>Undefined variable is equal to nil</p>
+   {% endif %}
+
+   <br>
+
+   {% comment %} Array {% endcomment %}
+   the array has {{  product.tags.size }}  elements {% comment %} With this we can know the quantity of elements on a array or the number of chars on a string {% endcomment %}
+   <br>
+  {% comment %} loops {% endcomment %}
+   {% for tag in product.tags %}
+     {{ tag }} <br>
+   {% endfor %}
+
+   {% comment %} Objects {% endcomment %}
+    <p>{{ product.title }}</p>
+
+    {% comment %} Another way declare variables is with capture, everything between the tags will be the content of the variable, this is useful to render shopify varibales merged with html {% endcomment %}
+
+    {% capture html %}
+      <div> 
+        <p> hello {{ product.title }}</p>
+      </div>
+    {% endcapture %}
+
+    {{ html }}
+
+    {% assign my_variable = 9 %}
+    {% assign my_string_variable = 'hello' %}
+
+    {% if my_variable > 10 %}
+      <p> my_variable is greater than 10 </p>
+
+      {% assign my_nested_variable = 20 %}
+      <p> {{ my_nested_variable }}</p>
+
+      {% elsif my_variable > 5 %}
+        <p>my_varable is greater than 5</p>
+
+        {% elsif my_variable > 3 %}
+        <p>my_varable is greater than 3</p>
+        
+      {% else %}
+        <p>my_variable not greater than 10 </p>
+    {% endif %}
+
+    {% if my_variable < 10 %}
+      <p> my_variable is less than 10</p>
+    {% endif %}
+
+    {% if my_variable == 10 %}
+      <p> my_variable is equal to 10 </p>
+    {% endif %}
+
+    {% if my_variable >= 10 %}
+      <p> my_varibale is greater than or equal to 10 </p>
+    {% endif %}
+
+     {% if my_variable <= 10 %}
+      <p> my_varibale is less than or equal to 10 </p>
+    {% endif %}
+
+    {% if my_string_variable == 'hello' %}
+      <p> My string is hello</p>
+    {% endif %}
+
+    {% if my_string_variable != 'hello' %}
+      <p> My string is not hello</p>
+    {% endif %}
+
+    {% comment %} contains operator ca be use to check if there is a subtext inside a string or an element in an array{% endcomment %}
+    <p><b>{{ product.title }}</b></p>
+    <p>{{ product.tags }}</p>
+
+    {% if product.title contains 'Snowboard' %}
+      <p> this is a Snowboard </p>
+    {% endif %}
+
+    {% if product.tags contains 'Winter' %}
+      <p> This is a winter product </p>
+    {% endif %}
+
+    {% comment %} to negate contains we use unless {% endcomment %}
+
+    {% unless product.tags contains "Premium" %}
+      <p> This product doesn't contain the premium tag </p>
+      {% else %}
+        <p> This product contains the premium tag </p>
+    {% endunless %}
