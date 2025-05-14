@@ -1,3 +1,6 @@
+{% comment %}
+  ----> I COMMENTED THIS PART OF THE CODE TO NOT DELETE IT IN CASE I NEED IT TO STUDY LATER 
+
 {% comment %} These are the types of varibales we can work with in shopify {% endcomment %}
 
 {% comment %} String {% endcomment %}
@@ -175,9 +178,9 @@
                 forloop.parentloop.index take the value of the first loop we create inside the nested loops, if there are more loops inside the first loop we can use forloop.parentloop.parentloop as much as we need
                 to get to the value we want
               {% endcomment %}
-               {% if tag == "Accesory" %}
-                {% continue %}{% comment %} This continue the iteration at the specific point where the for is valid{% endcomment %}
-              {% endif %}
+                {% if tag == "Accesory" %}
+                  {% continue %}{% comment %} This continue the iteration at the specific point where the for is valid{% endcomment %}
+                {% endif %}
               <li> Product Index {{ forloop.parentloop.index }} | {{ tag }} </li>
               {% if tag == "Sport" %}
                 {% break %}{% comment %} This end the iteration at the specific point where the for is valid{% endcomment %}
@@ -189,3 +192,85 @@
         {% else %}
              <p> This collection has no products </p>
        {% endfor %}
+
+       {% for i in (11..15) %}
+         <p> Hello World {{ i }} - {{ forloop.index }} </p>
+       {% endfor %}
+
+       {% comment %}
+          Paginations
+        {% endcomment %}
+       {% paginate collection.products by 5 %}
+        {% for product in collection.products %}
+          <p>{{  product.title }} </p>
+        {% endfor %}
+
+        {{ paginate | default_pagination }}
+      {% endpaginate %}
+
+       I COMMENTED THIS PART OF THE CODE TO NOT DELETE IT IN CASE I NEED IT TO STUDY LATER <----
+{% endcomment %}
+
+{% comment %}
+  Filters
+{% endcomment %}
+ {% assign number_1 = 10 %}
+ {% assign string_number = '10' %}
+
+ {% assign number_2 = number_1 | plus: 5 %}
+ {% assign number_3 = number_2 | minus: 10 %}
+ {% assign number_4 = number_3 | times: 4 %}
+ {% assign number_5 = number_4 | divided_by: 3 %}
+
+ Plus: {{ number_2 }} - Minus:  {{ number_3 }} - Multiply: {{ number_4 }} - Divided: {{ number_5 }}
+
+{% comment %}
+  String are converted to  numbers by multiplying by 0, example: 
+{% endcomment %}
+{% assign string_to_number = string_number | plus: 0 %}
+
+{% if string_to_number > 5 %}
+  <p> The number {{ string_to_number }} is greater than 5 </p>
+{% endif %}
+
+{% comment %}
+  Modulo = resto in Math: it will let us know if a value can ve even or odd (par o impar)
+{% endcomment %}
+{% assign modulo_number = number_1 | modulo: 2 %}
+
+{% if modulo_number == 0 %}
+  <p> Even </p>
+  {% else %}
+    <p> odd </p>
+{% endif %}
+
+{% comment %}
+  Abs stands for absolute number
+{% endcomment %}
+{% assign my_abs_numer = -11 | abs %}
+<p>{{ my_abs_numer }}</p>
+
+{% comment %}
+  round numbers
+{% endcomment %}
+
+{% assign round_number = 10.5 | round %}
+<p>Rounded number by defualt goes upwards  {{ round_number }}</p>
+
+{% assign round_number_f = 10.5 | floor %}
+<p>Rounded number going downwards: {{ round_number_f }}</p>
+
+{% assign round_number_c = 10.4 | ceil %}
+
+<p> Rounded number going upwards by the nearest int val: {{ round_number_c }} </p>
+
+{% comment %}
+  capped numbers
+{% endcomment %}
+{% assign capped_number = 100 %}
+{% assign capped_number_2 = 60 %}
+<p> Capped number to be 80 of 100: {{ capped_number | at_most: 80 }} </p>
+<p> Capped number to be 100 at least: {{ capped_number_2 | at_least: 100 }} </p>
+  
+
+
