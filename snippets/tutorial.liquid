@@ -209,7 +209,7 @@
       {% endpaginate %}
 
        I COMMENTED THIS PART OF THE CODE TO NOT DELETE IT IN CASE I NEED IT TO STUDY LATER <----
-{% endcomment %}
+
 
 {% comment %}
   Filters
@@ -271,6 +271,24 @@
 {% assign capped_number_2 = 60 %}
 <p> Capped number to be 80 of 100: {{ capped_number | at_most: 80 }} </p>
 <p> Capped number to be 100 at least: {{ capped_number_2 | at_least: 100 }} </p>
-  
+  {% endcomment %}
+
+  {%  comment %}
+    String filters
+  {% endcomment %}
+   {% assign string_var = "Hello World" %}
+   {% assign string_var_2 = " From Accel" %}
+   {% assign string_with_white_space = " This HAs White Space  " %}
+   {% assign my_html_var = "<p style='color: red'> My text Html removed </p>" %}
+   {% assign my_long_string = "This is some long text that will be trimmed" %}
+ 
+   <p>{{ string_var | upcase }}</p>{% comment %} UPPER CASE {% endcomment %}
+   <p>{{ string_var| downcase }}</p> {% comment %} Lower case{% endcomment %}
+   <p> {{ string_var | capitalize }} </p> {% comment %} To make the first letter uppercase{% endcomment %}
+   <p> {{ string_var | append: string_var_2 }}</p> {% comment %} To concat two or more strings {% endcomment %}
+
+   <p> {{ string_with_white_space | strip  | append: "!" }} </p> {% comment %} The strip filter remove white spaces{% endcomment %}
+   <p> {{ my_html_var | strip_html }} </p>
+   <p> {{ my_long_string | truncate: 20, "!" }} </p> {% comment %}totruncate a specific quantity of charactes, the second argument is to specify the finish line of the text. by default is ... {% endcomment %}
 
 
