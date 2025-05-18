@@ -271,7 +271,7 @@
 {% assign capped_number_2 = 60 %}
 <p> Capped number to be 80 of 100: {{ capped_number | at_most: 80 }} </p>
 <p> Capped number to be 100 at least: {{ capped_number_2 | at_least: 100 }} </p>
-  {% endcomment %}
+ 
 
   {%  comment %}
     String filters
@@ -279,8 +279,18 @@
    {% assign string_var = "Hello World" %}
    {% assign string_var_2 = " From Accel" %}
    {% assign string_with_white_space = " This HAs White Space  " %}
-   {% assign my_html_var = "<p style='color: red'> My text Html removed </p>" %}
+   {% assign my_html_var = "<p style='color: red'> My text Html removed with some very long text </p>" %}
    {% assign my_long_string = "This is some long text that will be trimmed" %}
+   {% assign my_multiline_text = 
+      "
+        This is my first line
+        This is my second line
+        This is my third line
+      " %}
+    {% assign new_text = "This is some text" %}
+    {% assign new_text_2 = "This is some text some text" %}
+    {% assign my_str_numbers = "1,2,3,4" | split: "," %}
+    {% assign lenguage_var = "html|orange,css|blue,javascript|yellow" | split: "," %}
  
    <p>{{ string_var | upcase }}</p>{% comment %} UPPER CASE {% endcomment %}
    <p>{{ string_var| downcase }}</p> {% comment %} Lower case{% endcomment %}
@@ -289,6 +299,44 @@
 
    <p> {{ string_with_white_space | strip  | append: "!" }} </p> {% comment %} The strip filter remove white spaces{% endcomment %}
    <p> {{ my_html_var | strip_html }} </p>
-   <p> {{ my_long_string | truncate: 20, "!" }} </p> {% comment %}totruncate a specific quantity of charactes, the second argument is to specify the finish line of the text. by default is ... {% endcomment %}
+   <p> {{ my_long_string | truncate: 20, "!" }} </p> {% comment %}to truncate a specific quantity of charactes, the second argument is to specify the finish char of the text. by default is ... {% endcomment %}
+   <p> {{ my_long_string |truncatewords: 3, "?" }}</p> {% comment %}To truncate a specific quantity of words, the second argument is to specify the finish char of the text. by default is ...{% endcomment %}
 
+   <p> {{ my_html_var | strip_html | truncatewords: 4 }} </p> {% comment %} We can mix the two filers when in need of just keep the text inside a html part {% endcomment %}
 
+   <p> {{ my_multiline_text | newline_to_br }} </p> {% comment %} to make a br at the end of every line of text {% endcomment %}
+   <p> {{ new_text | replace: "text", "long text" }}</p>
+   <p> {{ new_text_2 | replace_first: "text", "Poem" }} </p>
+   <p> {{ new_text_2 | replace_last: "text", "Poem" }} </p>
+   <p> {{ new_text_2 |remove: "text" }}</p>
+   <p> {{ new_text_2 |remove_first: "text" }}</p>
+   <p> {{ new_text_2 |remove_last: "text" }}</p>
+
+    {% for number in my_str_numbers %}
+      <p> {{ number }} </p>
+    {% endfor %}
+
+    {% for l in lenguage_var %}
+      {% assign language_name = l |split: "|" | first %}
+      {% assign language_color = l |split: "|" | last %}
+      <p style="color: {{ language_color }} "> {{ language_name }} </p>
+    {% endfor %}
+      {% endcomment %}
+
+{% assign products = collection.products %}
+{% assign product_titles = products | map: 'title' %}
+{% assign product_titles_reverse = products | map: 'title' | reverse %}
+
+{% for p in product_titles %}
+  <p>{{ p }} </p>
+{% endfor %}
+
+{{ product_titles | join: " - " }}
+
+{% for p2 in product_titles_reverse %}
+  <p> {{ p2 }} </p>
+{% endfor %}
+
+<p> First item {{ product_titles | first }} </p> {% comment %} First item{% endcomment %}
+<p> last item {{ product_titles | last }}</p> {% comment %}Last item {% endcomment %}
+<p> Size of the array: {{ product_titles | size }} </p> {% comment %}The size of the array{% endcomment %}
