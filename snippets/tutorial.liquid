@@ -321,7 +321,7 @@
       {% assign language_color = l |split: "|" | last %}
       <p style="color: {{ language_color }} "> {{ language_name }} </p>
     {% endfor %}
-      {% endcomment %}
+      
 
 {% assign products = collection.products %}
 {% assign product_titles = products | map: 'title' %}
@@ -340,3 +340,63 @@
 <p> First item {{ product_titles | first }} </p> {% comment %} First item{% endcomment %}
 <p> last item {{ product_titles | last }}</p> {% comment %}Last item {% endcomment %}
 <p> Size of the array: {{ product_titles | size }} </p> {% comment %}The size of the array{% endcomment %}
+{% comment %}
+  another way of use these filters is...
+{% endcomment %}
+
+<p>{{ product_titles.first }}</p>
+<p>{{ product_titles.last }} </p>
+<p>{{ product_titles.size }} </p>
+
+{% comment %}
+  the before example is useful when trying to use in an if statement
+{% endcomment %}
+
+{% if product_titles.size > 5 %}
+  <p> El titulo es  {{ product_titles }} </p>
+{% endif %}
+
+{% comment %}
+  The Sort filter
+{% endcomment %}
+
+{% assign price_sorted_items = products |sort: 'price' %}
+
+ {% for pr in price_sorted_items %}
+   <p> {{ pr.title }} - {{ pr.price | money }} </p>
+ {% endfor %}
+
+ {% assign all_prices = products | map: 'price' | sort %}
+
+ {%  for ap in all_prices %}
+   <p> {{ ap | money }} </p>
+ {% endfor %}
+
+ {% comment %}
+   to sum all prices in the array
+ {% endcomment %}
+
+ {% assign sum_prices = all_prices | sum %}
+
+ <p> total prices: {{ sum_prices |money }} </p>
+
+ {% comment %}
+   To find an specific item in the array we use where
+ {% endcomment %}
+
+ {% assign snowboard_2 = products | where: 'title', 'The Complete Snowboard' | first %}
+ <p> es:  {{snowboard_2.title }} - {{ snowboard_2.price | money }} </p>
+
+{% comment %}
+  To get all the tags in a product
+{% endcomment %}
+
+{% assign tags = "" %}
+{% for p3 in products %}
+  {% for t in p3.tags %}
+    {% assign tags  = tags | append: t| append: "  " %}
+  {% endfor %}
+{% endfor %}
+
+<p> {{ tags | split: "  " | uniq | join: " " }} </p>
+{% endcomment %}
