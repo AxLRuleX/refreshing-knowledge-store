@@ -1,0 +1,13 @@
+.highlight
+    {
+      background: yellow;
+    }
+
+  .swatch_2
+    {
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      border: 1px solid black;
+      display: block !important; 
+    }
