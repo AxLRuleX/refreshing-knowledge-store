@@ -300,8 +300,8 @@
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     
-
-    {% render 'tutorial' %} {% comment %} I render te tutorial snippet here {% endcomment %}
+{% assign description_in_uppercase = 'my description' | upcase %}
+    {% render 'tutorial', title: 'my title', description:  description_in_uppercase %} {% comment %} I render te tutorial snippet here, the other arguments are optional{% endcomment %}
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

@@ -412,7 +412,7 @@
 
 
 <p> {{ collection.description | default: "This is a random description" }} </p>
-{% endcomment %}
+
 
 {% comment %}
   With the asset_url we can pass the url of any asset in our asset folder
@@ -479,3 +479,33 @@
   {% endcomment %}
 
   <script src="{{ 'tutorial.js' | asset_url }}" defer> </script>
+  {% comment %}
+    If we are going to write larges ammount ofcode in liquid we can use the liquid tag
+  {% endcomment %}
+  {% endcomment %}
+  {% liquid
+    assign my_new_variable = 10
+
+    for a in collection.products
+      echo '<p>' | append: a.title | append: '</p>'
+    endfor
+  %}
+
+  {% assign title = title |default: 'Default title' %}{% comment %} In case the title comes empty from the render tag{% endcomment %}
+  <p> {{ my_new_variable }} </p>
+  <p> {{ tutorial }} </p>
+  <p> {{ title }} </p>
+  <p> {{ description }} </p>
+
+  {% comment %}
+    In case we need debugging from console  we can use js embeded with liquid
+
+    and we can also use the command  "shopify theme console" for debugging if we pass
+    only like that it will run in the home page, however we can pass the --url parameter to
+    pass the url of the page we want to debug, for example, --url '/collections/all'
+  {% endcomment %}
+
+  <script> console.log({{ collection.products.first | json }}) </script>
+
+  <script> console.log("{{ collection.title }}") </script>
+
