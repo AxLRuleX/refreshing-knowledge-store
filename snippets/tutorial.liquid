@@ -399,5 +399,85 @@
 {% endfor %}
 
 <p> {{ tags | split: "  " | uniq | join: " " }} </p>
+
+
+{%  comment %}
+  json filters: to show the properties of objects
 {% endcomment %}
  
+<p>{{ collection.products.first | json }}</p>
+{% endcomment %}
+{% comment %}
+  default value filter, it lets me set a default value if the val y empty
+
+
+<p> {{ collection.description | default: "This is a random description" }} </p>
+
+{% comment %}
+  highlight filter
+{% endcomment %}
+ <style>
+  .highlight
+    {
+      background: yellow;
+    }
+
+  .swatch
+    {
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      border: 1px solid black;
+      display: block !important; 
+    }
+ </style>
+  <p>{{ "This is some text with some more text" | highlight: 'text' }}</p>
+
+  {% comment %}
+    date filter
+  {% endcomment %}
+
+  <p> Copyright {{ 'now' | date: '%Y-%m-%d'  }} </p>
+
+  {% assign background_color = '#ff0000' %} {% comment %} white color{% endcomment %}
+
+  {% assign background_color_2 = '#ff0000' %} {% comment %}black color {% endcomment %}
+  <div class="swatch" style="background: {{ background_color | color_darken: 20 }} "> </div>
+
+  <div class="swatch" style="background: {{ background_color_2 | color_lighten: 10 }} "> </div>
+
+  {% assign color_1 = '#ff0000' %} {% comment %} red{% endcomment %}
+  {% assign color_2 = '#0000ff' %} {% comment %} blue {% endcomment %}
+
+  {% comment %}
+    the color mix filter uses a second parameter to speficy for what ammount we want the first color to get mix with the second colors
+  {% endcomment %}
+  <div class="swatch" style="background: {{ color_1 | color_mix: color_2, 70}} "> </div>
+
+  {% comment %}
+    convert color format
+  {% endcomment %}
+   {% assign color_3 = 'rgb(0, 255, 0)' %} {% comment %}Green{% endcomment %}
+   <p> {{ color_3 | color_to_hsl }} </p>
+
+   <div class="swatch" style="background: {{ color_3}} "> </div>
+
+   {% comment %}
+     Color contrast: this is used to verify the accesibility of the page.
+
+     For accesibility best practice, The WCAG 2.0 Level AA requires a minimum contrast
+     ratio of 4.5:1 for normal text and 3.1 for large text. Level AAA requires a minimum
+     Contast ratio of 7.1 for normal text and 4.5:1 for large text
+   {% endcomment %}
+
+   <p> {{ '#ffffff' | color_contrast: '#000000' }}, {{ '#ffffff' | color_contrast: '#f3f3f3' }} </p> {% comment %}The second color of the last contrast is light gray{% endcomment %}
+   {% endcomment %}
+
+   {% comment %}
+     Image Filters: we use the image_tag filter at the end and not the <img src='{{ ... }}'>
+     becase with the first one we leave shopify to handle the alt
+   {% endcomment %}
+
+   <p>{{ collection.products.first.featured_image |image_url: width: 500, height: 500 | image_tag }}</p>
+
+  
