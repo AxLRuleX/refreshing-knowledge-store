@@ -1,3 +1,50 @@
+{% comment %}
+  find filter, find the object in the array and return it content
+{% endcomment %}
+
+{% assign heading_block = section.blocks | find: "type", "heading" %}
+<p>{{ heading_block.settings.heading }}</p>
+
+{% comment %}
+  Find index filter, check for the position of the object in the array
+{% endcomment %}
+
+{% assign button_block_index = section.blocks | find_index: "type", "button" %}
+
+<p> {{ button_block_index }}</p>
+
+{% comment %}
+  Has filter
+{% endcomment %}
+
+<p> {{ section.blocks | has: "type", "heading" }} </p>
+
+{% comment %}
+  Reject filter
+{% endcomment %}
+
+{% assign non_heading_blocks = section.blocks | reject: "type", "heading" %}
+
+<p> {{ non_heading_blocks.size }} </p>
+
+
+{% comment %}
+  This filters doesn't allow nested properties at the moment, so if we
+  need to check them, we need to use the following
+{% endcomment %}
+
+{% assign has_larn_more_button = false %}
+
+{% for block in section.blocks %}
+  {% if block.settings.button_label == "Learn More" %}
+    {% assign has_larn_more_button = true %}
+  {% endif %}
+{% endfor %}
+
+<p> {{ has_larn_more_button }} </p>
+
+
+
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}

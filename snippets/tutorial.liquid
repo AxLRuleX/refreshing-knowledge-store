@@ -482,7 +482,7 @@
   {% comment %}
     If we are going to write larges ammount ofcode in liquid we can use the liquid tag
   {% endcomment %}
-  {% endcomment %}
+  
   {% liquid
     assign my_new_variable = 10
 
@@ -508,4 +508,4 @@
   <script> console.log({{ collection.products.first | json }}) </script>
 
   <script> console.log("{{ collection.title }}") </script>
-
+{% endcomment %}
