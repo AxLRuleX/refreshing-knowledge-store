@@ -472,6 +472,7 @@
 
    <p>{{ collection.products.first.featured_image |image_url: width: 500, height: 500 | image_tag }}</p>
 
+   {% comment %} if the image if loading at the top, we use eager, if not, we use lazy, to make the it load as the user scroll through the page {% endcomment %}
    <img src="{{ 'snowboard.jpg' |asset_img_url: '' }}" alt="Snowboard" loading="eager" width="500" height="500"/>
 
   {% comment %}
