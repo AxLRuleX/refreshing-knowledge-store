@@ -1,0 +1,23 @@
+<h2> {{ section.settings.title }} </h2>{% comment %} The last value must match the value of the id in the settings schema{% endcomment %}
+
+{% schema %}
+{
+    "name": "Promotions Group",
+    "tag": "section",
+    "class": "my-wrapper-class",
+    "settings": 
+        [
+            {
+                "type": "text",
+                "label": "Title",
+                "id": "title"
+            }
+        ],
+    "presets": 
+        [
+            {
+                "name": "Promotions Group"
+            }
+        ]
+}
+{% endschema %}
