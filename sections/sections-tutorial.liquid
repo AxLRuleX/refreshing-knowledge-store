@@ -1,12 +1,49 @@
 <p> Hello world </p>
 
+<h2> Text Setting </h2>
+<p> {{ section.settings.text_setting }} </p>
+
+<h2> Textarea Setting </h2>
+<p> {{ section.settings.textarea_setting | newline_to_br }} </p>
+
+<h2> Richtext Setting </h2>
+<div> {{ section.settings.richtext_setting }} </div>{% comment %} It must be enclosed within div beacuse richtext add it's own html tags as needed{% endcomment %}
+
+<h2> Inline Richtext Setting </h2>
+<div> {{ section.settings.inline_richtext_setting }} </div>
 {% schema %}
 {
     "name": "Sections Tutorial",
     "tag": "section",
     "class": "section-tutorial",
     "limit": 2,
-    "settings": [],
+    "settings": 
+        [
+            {
+                "type": "text",
+                "id": "text_setting",
+                "label": "Text Setting",
+                "default": "This is my first setting",
+                "info": "this is some helper text",
+                "placeholder": "This is a plceholder"
+            },
+            {
+                "type": "textarea",
+                "id": "textarea_setting",
+                "label": "Textarea Setting",
+                "placeholder": "This is a placeholder"
+            },
+            {
+                "type": "richtext",
+                "id": "richtext_setting",
+                "label": "Richtext Setting"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "inline_richtext_setting",
+                "label": "Inline Richtext Setting"
+            }
+        ],
     "blocks": [],
     "presets": 
         [
