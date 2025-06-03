@@ -11,6 +11,34 @@
 
 <h2> Inline Richtext Setting </h2>
 <div> {{ section.settings.inline_richtext_setting }} </div>
+
+<h2> Number Setting </h2>
+<p> {{ section.settings.number_setting }} </p>
+
+<h2> Range Setting </h2>
+<p> {{ section.settings.range_setting }} </p>
+
+<h2> Select Setting </h2>
+<p> {{ section.settings.select_setting }} </p>
+
+<h2> Checkbox Setting </h2>
+{% if section.settings.checkbox_setting == true %}
+  <p> Checkbox is true </p>
+  {% else %}
+    <p> Checkbox is False </p>
+{% endif %}
+
+<h2> Radio Setting </h2>
+<p> {{ section.settings.radio_setting }} </p>
+
+<h2> Color Setting </h2>
+<p> {{ section.settings.color_setting }} {{ section.settings.color_setting.lightness }} <div style="width: 50px; height: 50px; brder: 1px solid #000000; background: {{ section.settings.color_setting }}"> </div> </p>
+
+<div style="background: {{ section.settings.color_background_setting }}">
+    <h2> Color Background Setting </h2>
+    <p> {{ section.settings.color_background_setting }} </p>
+</div>
+
 {% schema %}
 {
     "name": "Sections Tutorial",
@@ -42,6 +70,86 @@
                 "type": "inline_richtext",
                 "id": "inline_richtext_setting",
                 "label": "Inline Richtext Setting"
+            },
+             {
+                "type": "number",
+                "id": "number_setting",
+                "label": "Number Setting",
+                "placeholder": "This is a placeholder"
+            },
+            {
+                "type": "range",
+                "id": "range_setting",
+                "label": "Range Setting",
+                "default": 10,
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "px"
+            },
+            {
+                "type": "select",
+                "id": "select_setting",
+                "label": "Select Setting",
+                "options": 
+                    [
+                        {
+                            "value": "value_1",
+                            "label": "Value 1",
+                            "group": "group_1"
+                        },
+                        {
+                            "value": "value_2",
+                            "label": "Value 2",
+                            "group": "group_1"
+                        },
+                        {
+                            "value": "value_3",
+                            "label": "Value 3",
+                            "group": "group_2"
+                        },
+                        {
+                            "value": "value_4",
+                            "label": "Value 4",
+                            "group": "group_2"
+                        }
+                    ]
+            },
+            {
+                "type": "checkbox",
+                "label": "Checkbox Setting",
+                "id": "checkbox_setting",
+                "default": true
+            },
+            {
+                "type": "radio",
+                "label": "Radio Button Setting",
+                "id": "radio_setting",
+                "options": 
+                    [
+                        {
+                            "value": "value_1",
+                            "label": "Value 1"
+                        },
+                        {
+                            "value": "value_2",
+                            "label": "Value 2"
+                        },
+                        {
+                            "value": "value_3",
+                            "label": "Value 3"
+                        }
+                    ]
+            },
+            {
+                "type": "color",
+                "label": "Color Setting",
+                "id": "color_setting"
+            },
+            {
+                "type": "color_background",
+                "label": "Color Background",
+                "id": "color_background_setting"
             }
         ],
     "blocks": [],

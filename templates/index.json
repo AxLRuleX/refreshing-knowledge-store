@@ -102,11 +102,29 @@
         "title": "Promotion 1",
         "title_alignment": "center"
       }
+    },
+    "sections_tutorial_Xp6t9x": {
+      "type": "sections-tutorial",
+      "name": "Sections Tutorial",
+      "settings": {
+        "text_setting": "This is my first setting in settings",
+        "textarea_setting": "This is a textarea text\nWith two lines",
+        "richtext_setting": "<p>This is some rich text</p><p></p><ul><li>and</li><li>with</li><li>lists</li></ul>",
+        "inline_richtext_setting": "This is another richtext <strong>but singlelined</strong>",
+        "number_setting": 60,
+        "range_setting": 20,
+        "select_setting": "value_2",
+        "checkbox_setting": false,
+        "radio_setting": "value_2",
+        "color_setting": "#023c8c",
+        "color_background_setting": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+      }
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "promotion_group_phBpx6"
+    "promotion_group_phBpx6",
+    "sections_tutorial_Xp6t9x"
   ]
 }
