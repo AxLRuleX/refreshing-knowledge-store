@@ -117,7 +117,30 @@
         "checkbox_setting": false,
         "radio_setting": "value_2",
         "color_setting": "#023c8c",
-        "color_background_setting": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+        "color_background_setting": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+        "image_picker_setting": "shopify://shop_images/Main_c8ff0b5d-c712-429a-be00-b29bd55cbc9d.jpg",
+        "video_setting": "shopify://files/videos/opening nuevo logo.mp4",
+        "video_url_setting": "https://www.youtube.com/watch?v=3n5sWA2ow1Q&list=PLsr48ksn9_9Bzii-fRXRTVAo3OPYTtMAU&index=7",
+        "url_setting": "shopify://products/the-collection-snowboard-hydrogen",
+        "html_setting": "<div style=\"width: 50%; height: 100px; margin-left: auto; margin-right: auto; border: 1px solid #000000; margin-bottom: 15px; border-radius: 20px\">\n</div>",
+        "liquid_setting": "{% assign a = \"Hello World\" %}\n\n{{ a }}\n<br>\n{{ 10 | plus: 10 }}\n<br>\n{{ shop.name }}",
+        "product_setting": "the-compare-at-price-snowboard",
+        "product_list_setting": [
+          "the-3p-fulfilled-snowboard",
+          "the-compare-at-price-snowboard",
+          "the-collection-snowboard-liquid"
+        ],
+        "collection_setting": "empty-collection",
+        "collection_list_setting": [
+          "hydrogen",
+          "frontpage",
+          "empty-collection",
+          "automated-collection"
+        ],
+        "page_setting": "data-sale-opt-out",
+        "article_setting": "",
+        "blog_setting": "",
+        "link_list_setting": "customer-account-main-menu"
       }
     }
   },
