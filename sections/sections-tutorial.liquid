@@ -1,3 +1,5 @@
+{% comment %}
+
 <p> Hello world </p>
 
 <h2> Text Setting </h2>
@@ -107,6 +109,44 @@
 
 <h2> Link List Setting </h2>
 <div> {{ section.settings.link_list_setting.title }} </div>
+
+<h2> Text Alignment Setting </h2>
+<p style="text-align: {{ section.settings.text_alignment_setting }}"> <b>This is some text </b></p>
+
+<h2> Font Picker </h2>
+<p> Font Setting: {{ section.settings.font_setting.family }} </p>
+
+<style>
+    {{section.settings.font_setting | font_face: font_display: "swap" }}
+
+    .section-tutorial *
+        {
+            font-family: {{ section.settings.font_setting.family }};
+        }
+</style>
+
+{% endcomment %}
+
+{% for block in section.blocks %}
+  {%  if block.type == "section_collection" %}
+    {% assign title = block.settings.title | default: block.settings.collection.title %}
+    {% assign image = block.settings.image | default: block.settings.collection.featured_image %}
+  {% elsif block.type == "section_product" %}
+    {% assign title = block.settings.title | default: block.settings.product.title %}
+    {% assign image = block.settings.image | default: block.settings.product.featured_image %}
+  {% endif %}
+
+
+  {% if image %}
+    <div> 
+        {{ image | image_url: width: 500 | image_tag}}
+    </div>
+  {% endif %}
+  
+<p> {{ title }} </p>
+
+
+{% endfor %}
 
 {% schema %}
 {
@@ -256,6 +296,11 @@
                 "label": "Liquid Setting"
             },
             {
+                "type": "header",
+                "content": "Site Resources Settings",
+                "info": "Settings Related to shopify Resources. [learn More](https://shopify.com)"
+            },
+            {
                 "type": "product",
                 "label": "Product Setting",
                 "id": "product_setting"
@@ -296,9 +341,78 @@
                 "type": "link_list",
                 "label": "Link List Setting",
                 "id": "link_list_setting"
+            },
+            {
+                "type": "text_alignment",
+                "id": "text_alignment_setting",
+                "label": "Text Alignment Setting",
+                "default": "center"
+            },
+            {
+                "type": "font_picker",
+                "id": "font_setting",
+                "label": "Font Setting",
+                "default": "assistant_n4"
+            },
+            {
+                "type": "color_scheme",
+                "id": "color_scheme_setting",
+                "label": "Color Schema",
+                "default": "scheme_1"
             }
         ],
-    "blocks": [],
+    "blocks":  
+        [
+            {
+                "type": "section_product",
+                "name": "Product",
+                "settings": 
+                    [
+                        {
+                            "type": "product",
+                            "id": "product",
+                            "label": "Product"
+                        },
+                        {
+                            "type": "text",
+                            "id": "title",
+                            "label": "Title",
+                            "info": "Optional: it will override the product's title if defined"
+                        },
+                        {
+                            "type": "image_picker",
+                            "id": "image",
+                            "label": "Image",
+                            "info": "OPtional: It will override the product's image if defined"
+                        }
+                    ],
+                    "limit": 4
+            },
+            {
+                "type": "section_collection",
+                "name": "Collection",
+                "settings": 
+                    [
+                        {
+                            "type": "collection",
+                            "id": "collection",
+                            "label": "Collection"
+                        },
+                        {
+                            "type": "text",
+                            "id": "title",
+                            "label": "Title",
+                            "info": "Optional: it will override the Collection's title if defined"
+                        },
+                        {
+                            "type": "image_picker",
+                            "id": "image",
+                            "label": "Image",
+                            "info": "OPtional: It will override the colection's image if defined"
+                        }
+                    ]
+            }
+        ],
     "presets": 
         [
             {
