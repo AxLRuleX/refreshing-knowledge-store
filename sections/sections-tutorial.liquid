@@ -127,26 +127,67 @@
 
 {% endcomment %}
 
-{% for block in section.blocks %}
-  {%  if block.type == "section_collection" %}
-    {% assign title = block.settings.title | default: block.settings.collection.title %}
-    {% assign image = block.settings.image | default: block.settings.collection.featured_image %}
-  {% elsif block.type == "section_product" %}
-    {% assign title = block.settings.title | default: block.settings.product.title %}
-    {% assign image = block.settings.image | default: block.settings.product.featured_image %}
-  {% endif %}
+{{ 'section-tutorial.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ tutorial.js | asset_url }}" defer> </script>
+
+<div class="section-tutorial__internal" style="--primary-color: {{ section.settings.color_setting }}"> {%  comment %}Im passing the variable --primary-color to theexternal css that i declared in the line above{% endcomment %}
+    <p> {{section.settings.text_setting }} </p>
+
+    <button class="button"> 
+        button
+    </button>
+
+<p> {{ section.index }} </p>
+<p> {{ section.id }} </p>
+
+{% if request.design_mode %}
+    {%  comment %}
+      Everythign inside this if statement will only apperar in the theme editor
+    {% endcomment %}
+  <p> this is from the theme editor </p>
+{% endif %}
 
 
-  {% if image %}
-    <div> 
-        {{ image | image_url: width: 500 | image_tag}}
-    </div>
-  {% endif %}
-  
-<p> {{ title }} </p>
+{% assign collections = section.blocks | where: "type", "section_collection" %}
+{% assign products = section.blocks | where: "type", "section_product" %}
+
+ <h2> Collection </h2>
+
+ {% for collection in collections %}
+   {% assign title = collection.settings.title | default: collection.settings.collection.title %}
+   {% assign image = collection.settings.image | default: collection.settings.collection.featured_image %}
+
+   <div {{ collection.shopify_attributes }}>{%  comment %} This is to make appear the blue blorder arround the blocks in the shopify theme editor{% endcomment %}
+    {% if image %}
+        <div> 
+            {{ image | image_url: width: 500 | image_tag}}
+        </div>
+    {% endif %}
+    
+    <p> {{ title }} </p>
+</div>
+ {% endfor %}
+
+ <h2> Products </h2>
+
+ {% for product in products %}
+   {% assign title = product.settings.title | default: product.settings.product.title %}
+   {% assign image = product.settings.image | default: product.settings.product.featured_image %}
+
+   <div {{ product.shopify_attributes }}>{%  comment %} This is to make appear the blue blorder arround the blocks in the shopify theme editor{% endcomment %}
+    {% if image %}
+        <div> 
+            {{ image | image_url: width: 500 | image_tag}}
+        </div>
+    {% endif %}
+    
+    <p> {{ title }} </p>
+</div>
+ {% endfor %}
+</div>
 
 
-{% endfor %}
 
 {% schema %}
 {
@@ -154,6 +195,10 @@
     "tag": "section",
     "class": "section-tutorial",
     "limit": 2,
+    "disabled_on": 
+        {
+            "templates": ["collection"]
+        },
     "settings": 
         [
             {
@@ -416,8 +461,79 @@
     "presets": 
         [
             {
-                "name": "Sections Tutorial",
-                "settings": {}
+                "name": "Sections Tutorial with products",
+                "settings": 
+                {
+                    "text_setting": "Section Tutorial With Product"
+                },
+                "blocks": 
+                    [
+                        {
+                            "type": "section_product",
+                            "settings": 
+                                {
+                                    "product": "the-compare-at-price-snowboard"
+                                }
+                        },
+                        {
+                            "type": "section_product",
+                            "settings": 
+                                {
+                                    "product": "the-compare-at-price-snowboard",
+                                    "title": "another rpoduct"
+                                }
+                        }
+                    ]
+            },
+            {
+                "name": "Sections Tutorial with Collections",
+                "settings": 
+                {
+                    "text_setting": "Section Tutorial With Collections"
+                },
+                "blocks": 
+                    [
+                        {
+                            "type": "section_collection",
+                            "settings": 
+                                {
+                                    "collection": "hydrogen"
+                                }
+                        },
+                        {
+                            "type": "section_collection",
+                            "settings": 
+                                {
+                                    "collection": "hydrogen",
+                                    "title": "another collection"
+                                }
+                        }
+                    ]
+            },
+            {
+                "name": "Sections Tutorial Mixed",
+                "settings": 
+                {
+                    "text_setting": "Section Tutorial With Products And Collections"
+                },
+                "blocks": 
+                    [
+                        {
+                            "type": "section_collection",
+                            "settings": 
+                                {
+                                    "collection": "hydrogen"
+                                }
+                        },
+                        {
+                            "type": "section_product",
+                            "settings": 
+                                {
+                                    "product": "the-compare-at-price-snowboard",
+                                    "title": "another product mixed"
+                                }
+                        }
+                    ]
             }
         ]
 }
