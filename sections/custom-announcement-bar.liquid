@@ -1,22 +1,29 @@
 {{ 'custom-announcement.css' | asset_url | stylesheet_tag }}
 
-<style>
---background-color: {{ section.settings.background_color }};
---text-color: {{ section.settings.text_color }}
-</style>
 
-{% assign announce = section.blocks | where: "type", "announcement" %}
+
+{% assign announces = section.blocks | where: "type", "announcement" %}
 
 
 
-<div style="width: 100%; heigth: 40px;>
+<div class="announce" style="--background-color: {{ section.settings.background_color }}; 
+                --text-color: {{ section.settings.text_color }}; 
+                width: 100%; 
+                height: 40px;">
 
-    {% for i in announce %}
+    {% for announce in announces %}
         
-        
-            <div style="width: 100%; height: 40px" {{ i.shopify_attributes }}>
-                <p> {{ i.settings.text_setting }} </p>
+        {% if forloop.length == 1 %}
+          <div {{ announce.shopify_attributes }}>
+                <p style="text-align: {{ announce.settings.text_alignment_setting }}; height: 40px"> {{ announce.settings.text_setting }} </p>
+          </div>
+          {% else %}
+            <div {{ announce.shopify_attributes }}>
+                <p style="text-align: {{ announce.settings.text_alignment_setting }}; height: 40px"> {{ announce.settings.text_setting }} </p>
             </div>
+        {% endif %}
+          
+            
         
       
     {% endfor %}
@@ -31,7 +38,7 @@
     "settings": 
         [
             {
-                "type": "color_background",
+                "type": "color",
                 "id": "background_color",
                 "label": "Background"
             },
@@ -53,6 +60,12 @@
                                 "type": "text",
                                 "id": "text_setting",
                                 "label": "Announcement"
+                            },
+                            {
+                                "type": "text_alignment",
+                                "id": "text_alignment_setting",
+                                "label": "Text Alignment",
+                                "default": "center"
                             }
                         ]
 

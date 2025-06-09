@@ -11,13 +11,42 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "custom_announcement_bar_tRFHhW": {
+      "type": "custom-announcement-bar",
+      "blocks": {
+        "announcement_VjdEnp": {
+          "type": "announcement",
+          "settings": {
+            "text_setting": "This is my second text",
+            "text_alignment_setting": "center"
+          }
+        },
+        "announcement_Dc3Ede": {
+          "type": "announcement",
+          "settings": {
+            "text_setting": "Buy Our stuff please",
+            "text_alignment_setting": "center"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_VjdEnp",
+        "announcement_Dc3Ede"
+      ],
+      "name": "Custom Section bar",
+      "settings": {
+        "background_color": "#023c8c",
+        "text_color": "#f3f3f3"
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
         "announcement-bar-0": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
-            "text": "Welcome to our store",
+            "text": "want to save 10% on your first 10% paint order?",
             "link": ""
           }
         }
@@ -28,7 +57,7 @@
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -56,6 +85,7 @@
     }
   },
   "order": [
+    "custom_announcement_bar_tRFHhW",
     "announcement-bar",
     "header"
   ]
