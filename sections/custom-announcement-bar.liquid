@@ -1,0 +1,69 @@
+{{ 'custom-announcement.css' | asset_url | stylesheet_tag }}
+
+<style>
+--background-color: {{ section.settings.background_color }};
+--text-color: {{ section.settings.text_color }}
+</style>
+
+{% assign announce = section.blocks | where: "type", "announcement" %}
+
+
+
+<div style="width: 100%; heigth: 40px;>
+
+    {% for i in announce %}
+        
+        
+            <div style="width: 100%; height: 40px" {{ i.shopify_attributes }}>
+                <p> {{ i.settings.text_setting }} </p>
+            </div>
+        
+      
+    {% endfor %}
+</div>
+
+{%  schema %}
+{
+    "name": "Custom Section bar",
+    "tag": "section",
+    "class": "custom-section-bar",
+    "limit": 1,
+    "settings": 
+        [
+            {
+                "type": "color_background",
+                "id": "background_color",
+                "label": "Background"
+            },
+            {
+                "type": "color",
+                "label": "Text Color",
+                "id": "text_color"
+            }
+        ],
+        "blocks": 
+            [
+                {
+                    "type": "announcement",
+                    "name": "Announcement",
+                    "limit": 4,
+                    "settings": 
+                        [
+                            {
+                                "type": "text",
+                                "id": "text_setting",
+                                "label": "Announcement"
+                            }
+                        ]
+
+                }
+            ],
+        "presets": 
+            [
+                {
+                    "name": "Custom Section bar",
+                    "settings": {}
+                }
+            ]
+}
+{% endschema %}
