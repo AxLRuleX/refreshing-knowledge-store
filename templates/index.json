@@ -137,7 +137,7 @@
           "empty-collection",
           "automated-collection"
         ],
-        "page_setting": "data-sale-opt-out",
+        "page_setting": "data-sharing-opt-out",
         "article_setting": "",
         "blog_setting": "",
         "link_list_setting": "customer-account-main-menu"
